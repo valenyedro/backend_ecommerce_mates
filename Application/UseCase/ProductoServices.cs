@@ -1,13 +1,7 @@
-﻿using Application.Interfaces.IOrden;
-using Application.Interfaces.IProducto;
+﻿using Application.Interfaces.IProducto;
 using Application.Models;
 using Application.Response;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UseCase
 {
@@ -20,18 +14,6 @@ namespace Application.UseCase
         {
             _command = command;
             _query = query;
-        }
-
-        public async Task<Producto> UpdateProducto(Producto producto)
-        {
-            await _command.UpdateProducto(producto);
-            return producto;
-        }
-
-        public async Task<Producto> DeleteProducto(Producto producto)
-        {
-            await _command.RemoveProducto(producto);
-            return producto;
         }
 
         public async Task<List<ProductoResponse>> GetProductosSort(ProductoRequest request)
@@ -116,6 +98,18 @@ namespace Application.UseCase
                 ProductoImage = Producto.Image,
             };
             return ProResponse;
+        }
+
+        public async Task<Producto> UpdateProducto(Producto producto)
+        {
+            await _command.UpdateProducto(producto);
+            return producto;
+        }
+
+        public async Task<Producto> DeleteProducto(Producto producto)
+        {
+            await _command.RemoveProducto(producto);
+            return producto;
         }
     }
 }

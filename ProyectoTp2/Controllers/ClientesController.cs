@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces.ICliente;
 using Application.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProyectoTp2.Controllers

@@ -2,7 +2,6 @@
 using Application.Models;
 using Application.Request;
 using Application.Response;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProyectoTp2.Controllers

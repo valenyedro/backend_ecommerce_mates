@@ -1,11 +1,7 @@
-﻿using Application.Interfaces.ICliente;
-using Application.Interfaces.IProducto;
+﻿using Application.Interfaces.IProducto;
 using Application.Models;
 using Application.Response;
-using Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProyectoTp2.Controllers
 {
@@ -62,7 +58,7 @@ namespace ProyectoTp2.Controllers
                     return NotFound();
                 return new JsonResult(Result) { StatusCode = 200 };
             }
-            catch (NullReferenceException e)
+            catch (Exception e)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }
