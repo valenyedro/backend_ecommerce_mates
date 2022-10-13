@@ -33,12 +33,12 @@ namespace Application.UseCase
 
         public async Task<CarritoResponse> AddProductoToCarrito(CarritoRequest carritoRequest)
         {
+            List<CarritoProducto> ListCarritoProd = await _servicesCarritoProducto.GetAllCarritoProductos();
             Cliente Cliente = await _queryCliente.GetCliente(carritoRequest.clientId);
             Producto Producto = await _queryProducto.GetProducto(carritoRequest.productId);
-            Carrito Carrito = await GetCarritoCliente(Cliente.ClienteId);
-
             if (Cliente == null || Producto == null)
                 return null;
+            Carrito Carrito = await GetCarritoCliente(Cliente.ClienteId);
 
             if (Carrito == null)
             {

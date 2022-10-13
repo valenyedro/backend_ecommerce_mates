@@ -17,7 +17,7 @@ namespace ProyectoTp2.Controllers
             _services = services;
         }
 
-        [HttpPatch]
+        [HttpPut]
         public async Task<IActionResult> AddProductoToCarrito(CarritoRequest request)
         {
             try
@@ -33,7 +33,7 @@ namespace ProyectoTp2.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> ModifyCarrito(CarritoRequest request)
         {
             try
