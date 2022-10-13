@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.ICarrito;
 using Application.Interfaces.ICliente;
 using Application.Models;
+using Application.Response;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,26 +15,52 @@ namespace Application.UseCase
     {
         private readonly IClienteCommand _command;
         private readonly IClienteQuery _query;
+        private readonly ICarritoServices _servicesCarrito;
 
-        public ClienteServices(IClienteCommand command, IClienteQuery query)
+        public ClienteServices(IClienteCommand command, IClienteQuery query, ICarritoServices servicesCarrito)
         {
             _command = command;
             _query = query;
+            _servicesCarrito = servicesCarrito;
         }
 
-        public async Task<Cliente> CreateCliente(ClienteRequest request)
+        public async Task<ClienteResponse> CreateCliente(ClienteRequest request)
         {
             var Cliente = new Cliente
             {
-                DNI = request.ClienteDNI,
-                Nombre = request.ClienteNombre,
-                Apellido = request.ClienteApellido,
-                Direccion = request.ClienteDireccion,
-                Telefono = request.ClienteTelefono
+                DNI = request.dni,
+                Nombre = request.name,
+                Apellido = request.lastname,
+                Direccion = request.address,
+                Telefono = request.phoneNumber
             };
+            
             await _command.InsertCliente(Cliente);
-            return Cliente;
+            Cliente.Carritos.Add(await _servicesCarrito.CreateCarrito(Cliente.ClienteId));
+            await _command.UpdateCliente(Cliente);
+
+            var ClienteResponse = new ClienteResponse
+            {
+                ClienteId = Cliente.ClienteId,
+                dni = request.dni,
+                name = request.name,
+                lastname = request.lastname,
+                address = request.address,
+                phoneNumber = request.phoneNumber
+            };
+            return ClienteResponse;
         }
+
+        public async Task NewCarritoActive(int clienteId)
+        {
+            Cliente Cliente = await _query.GetCliente(clienteId);
+            Carrito Carrito = await _servicesCarrito.GetCarritoCliente(clienteId);
+            Carrito.Estado = false;
+            await _servicesCarrito.UpdateCarrito(Carrito);
+            Cliente.Carritos.Add(await _servicesCarrito.CreateCarrito(Cliente.ClienteId));
+            await _command.UpdateCliente(Cliente);
+        }
+
         public async Task<Cliente> UpdateCliente(Cliente cliente)
         {
             await _command.UpdateCliente(cliente);

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Response
 {
-    public class CarritoResponse
+    public class BalanceResponse
     {
-        public int clientId { get; set; }
-        public int productId { get; set; }
-        public int amount { get; set; }
+        public decimal Recaudacion { get; set; }
+        public List<OrdenWithProductsResponse> Ordenes { get; set; }
+        
     }
 }

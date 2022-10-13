@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.ICarrito;
 using Application.Models;
-using Domain.Entities;
+using Application.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,61 +17,51 @@ namespace ProyectoTp2.Controllers
             _services = services;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _services.GetAllCarritos();
-            return new JsonResult(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateCarrito(CarritoRequest request)
-        {
-            var result = await _services.CreateCarrito(request);
-            return new JsonResult(result) { StatusCode = 201 };
-        }
-
-        [HttpPut("{CarritoId}")]
-        public async Task<IActionResult> UpdateCarrito(int CarritoId, Carrito request)
+        [HttpPatch]
+        public async Task<IActionResult> AddProductoToCarrito(CarritoRequest request)
         {
             try
             {
-                var result = await _services.UpdateCarrito(request);
-
-                return new JsonResult(result) { StatusCode = 201 };
+                var CarritoResponse = await _services.AddProductoToCarrito(request);
+                if (CarritoResponse == null)
+                    return BadRequest();
+                return new JsonResult(CarritoResponse) { StatusCode = 200 };
             }
-            catch (NullReferenceException j)
+            catch (Exception e)
             {
-                return new JsonResult(null) { StatusCode = 404 };
-            }
-        }
-
-        [HttpGet("{CarritoId}")]
-        public async Task<IActionResult> GetById(Guid carritoId)
-        {
-            try
-            {
-                var result = await _services.GetCarritoById(carritoId);
-                return new JsonResult(result) { StatusCode = 201 };
-            }
-            catch (NullReferenceException e)
-            {
-                return new JsonResult(null) { StatusCode = 404 };
+                return new JsonResult(null) { StatusCode = 500 };
             }
         }
 
-        [HttpDelete("{CarritoId}")]
-        public async Task<IActionResult> DeleteCarrito(Carrito carrito)
+        [HttpPut]
+        public async Task<IActionResult> ModifyCarrito(CarritoRequest request)
         {
             try
             {
-                var result = await _services.DeleteCarrito(carrito);
-                return new JsonResult(result) { StatusCode = 202 };
-            }
-            catch (NullReferenceException e)
+                var carritoResponse = await _services.ModifyCarrito(request);
+                if (carritoResponse == null)
+                    return BadRequest();
+                return new JsonResult(carritoResponse) { StatusCode = 200 };
+
+            } catch (Exception e)
             {
-                return NotFound();
-                //return new JsonResult(null) { StatusCode = 404 };
+                return new JsonResult(null) { StatusCode = 500 };
+            }
+        }
+
+        [HttpDelete("{clientId:Int}/{productId:Int}")]
+        public async Task<IActionResult> DeleteProductoFromCarrito(int clientId, int productId)
+        {
+            try
+            {
+                var Result = await _services.DeleteProductoFromCarrito(clientId, productId);
+                if (!Result)
+                    return BadRequest();
+                return new JsonResult(Result) { StatusCode = 200 };
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(null) { StatusCode = 500 };
             }
         }
     }

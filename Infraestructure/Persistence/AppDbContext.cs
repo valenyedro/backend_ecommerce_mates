@@ -10,16 +10,16 @@ namespace Infraestructure.Persistence
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+        {
+        }
+
         public DbSet<Carrito> Carrito { get; set; }
         public DbSet<CarritoProducto> CarritoProducto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Orden> Orden{ get; set; }
         public DbSet<Producto> Producto { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-QN3E4LJ;Database=proyectosoftware2;Trusted_Connection=True;");
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

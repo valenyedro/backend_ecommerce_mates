@@ -8,8 +8,6 @@ namespace Application.Models
 {
     public class OrdenRequest
     {
-        public Guid CarritoId { get; set; }
-        public DateTime OrdenFecha { get; set; }
-        public decimal OrdenTotal { get; set; }
+        public int ClientId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Application.Response;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ namespace Application.Interfaces.IProducto
 {
     public interface IProductoServices
     {
-        Task<Producto> CreateProducto(ProductoRequest request);
         Task<Producto> UpdateProducto(Producto cliente);
         Task<Producto> DeleteProducto(Producto cliente);
-        Task<List<Producto>> GetAllProductos();
-        Task<Producto> GetProductoById(int id);
+        Task<List<ProductoResponse>> GetAllProductos();
+        Task<ProductoResponse> GetProductoById(int id);
+        Task<List<ProductoResponse>> GetProductosSort(ProductoRequest request);
     }
 }

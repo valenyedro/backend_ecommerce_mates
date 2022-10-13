@@ -9,12 +9,12 @@ namespace Application.Response
 {
     public class ClienteResponse
     {
-        public string ClienteDNI { get; set; }
-        public string ClienteNombre { get; set; }
-        public string ClienteApellido { get; set; }
-        public string ClienteDireccion { get; set; }
-        public string ClienteTelefono { get; set; }
+        public int ClienteId { get; set; }
+        public string dni { get; set; }
+        public string name { get; set; }
+        public string lastname { get; set; }
+        public string address { get; set; }
+        public string phoneNumber { get; set; }
 
-        //public ICollection<Carrito> Carritos { get; set; }
     }
 }

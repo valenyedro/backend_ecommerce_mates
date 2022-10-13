@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Application.Response;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ namespace Application.Interfaces.ICliente
 {
     public interface IClienteServices
     {
-        Task<Cliente> CreateCliente(ClienteRequest request);
+        Task<ClienteResponse> CreateCliente(ClienteRequest request);
         Task<Cliente> UpdateCliente(Cliente cliente);
         Task<Cliente> DeleteCliente(Cliente cliente);
         Task<List<Cliente>> GetAllClientes();
         Task<Cliente> GetClienteById(int id);
+        Task NewCarritoActive(int clienteId);
     }
 }

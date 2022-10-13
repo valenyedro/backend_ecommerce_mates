@@ -8,8 +8,8 @@ namespace Application.Models
 {
     public class CarritoRequest
     {
-        public Guid CarritoId { get; set; }
-        public bool CarritoEstado { get; set; }
-        public int ClienteId { get; set; }
+        public int clientId { get; set; }
+        public int productId { get; set; }
+        public int amount { get; set; }
     }
 }

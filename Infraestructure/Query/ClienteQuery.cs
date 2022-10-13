@@ -27,7 +27,7 @@ namespace Infraestructure.Query
 
         public async Task<List<Cliente>> GetListClientes()
         {
-            var Clientes = await _context.Cliente.ToListAsync();
+            var Clientes = await _context.Cliente.Include(c => c.Carritos).ToListAsync();
             return Clientes;
         }
     }
