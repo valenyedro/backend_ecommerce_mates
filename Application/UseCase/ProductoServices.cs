@@ -22,7 +22,7 @@ namespace Application.UseCase
             List<Producto> ListaProductosSeleccionados = new List<Producto>();
             if (sort == null)
                 sort = true;
-            if(name == null)
+            if((bool)sort && name == null)
             {
                 var ProductosOrdenados = from Producto in ListaProductos
                                          orderby Producto.Precio ascending
@@ -30,7 +30,15 @@ namespace Application.UseCase
                 foreach (Producto prod in ProductosOrdenados)
                     ListaProductosSeleccionados.Add(prod);
             }
-            if ((bool)sort && name != null)
+            else if (!(bool)sort && name == null)
+            {
+                var ProductosOrdenados = from Producto in ListaProductos
+                                         orderby Producto.Precio descending
+                                         select Producto;
+                foreach (Producto prod in ProductosOrdenados)
+                    ListaProductosSeleccionados.Add(prod);
+            }
+            else if ((bool)sort && name != null)
             {
                 var ProductosOrdenados = from Producto in ListaProductos
                                          where Producto.Nombre.ToLower().Contains(name.ToLower())

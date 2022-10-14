@@ -6,11 +6,11 @@ namespace ProyectoTp2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarritoController : ControllerBase
+    public class carritoController : ControllerBase
     {
         private readonly ICarritoServices _services;
 
-        public CarritoController(ICarritoServices services)
+        public carritoController(ICarritoServices services)
         {
             _services = services;
         }

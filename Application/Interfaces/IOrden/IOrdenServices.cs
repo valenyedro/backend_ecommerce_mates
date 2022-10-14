@@ -6,7 +6,7 @@ namespace Application.Interfaces.IOrden
 {
     public interface IOrdenServices
     {
-        Task<OrdenResponse> CreateOrden(OrdenRequest request);
+        Task<OrdenWithProductsResponse> CreateOrden(OrdenRequest request);
         Task<Orden> UpdateOrden(Orden orden);
         Task<Orden> DeleteOrden(Orden orden);
         Task<List<Orden>> GetAllOrdenes();

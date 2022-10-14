@@ -65,39 +65,7 @@ namespace Application.UseCase
             {
                 List<ProductoResponse> Productos = new List<ProductoResponse>();
                 Carrito Carrito = await _servicesCarrito.GetCarritoById(orden.CarritoId);
-                Cliente Cliente = await _servicesCliente.GetClienteById(Carrito.ClienteId);
-                ClienteResponse ClienteResponse = new ClienteResponse
-                {
-                    ClienteId = Cliente.ClienteId,
-                    dni = Cliente.DNI,
-                    name = Cliente.Nombre,
-                    lastname = Cliente.Apellido,
-                    address = Cliente.Direccion,
-                    phoneNumber = Cliente.Telefono
-                };
-                foreach (CarritoProducto carritoProd in Carrito.CarritoProductos)
-                {
-                    Producto Prod = await _queryProducto.GetProducto(carritoProd.ProductoId);
-                    ProductoResponse ProdResponse = new ProductoResponse
-                    {
-                        ProductoId = Prod.ProductoId,
-                        ProductoNombre = Prod.Nombre,
-                        ProductoDescripcion = Prod.Descripcion,
-                        ProductoMarca = Prod.Marca,
-                        ProductoCodigo = Prod.Codigo,
-                        ProductoPrecio = Prod.Precio,
-                        ProductoImage = Prod.Image
-                    };
-                    Productos.Add(ProdResponse);
-                }
-                OrdenWithProductsResponse OrdenWithProductResponse = new OrdenWithProductsResponse
-                {
-                    OrdenId = orden.OrdenId,
-                    ClienteResponse = ClienteResponse,
-                    ProductosResponse = Productos,
-                    OrdenFecha = orden.Fecha,
-                    OrdenTotal = orden.Total
-                };
+                OrdenWithProductsResponse OrdenWithProductResponse = await GenerateOrdenWithProducts(Carrito, orden);
                 OrdenesWithProductsResponse.Add(OrdenWithProductResponse);
                 Recaudacion += orden.Total;
             }
@@ -111,7 +79,7 @@ namespace Application.UseCase
             return Balance;
         }
 
-        public async Task<OrdenResponse> CreateOrden(OrdenRequest request)
+        public async Task<OrdenWithProductsResponse> CreateOrden(OrdenRequest request)
         {
             Carrito Carrito = await _servicesCarrito.GetCarritoCliente(request.ClientId);
             if (Carrito == null)
@@ -130,14 +98,8 @@ namespace Application.UseCase
             await _command.InsertOrden(Orden);
             await _servicesCliente.NewCarritoActive(request.ClientId);
 
-            var OrdenResponse = new OrdenResponse
-            {
-                OrdenId = Orden.OrdenId,
-                CarritoId = Orden.CarritoId,
-                OrdenFecha = Orden.Fecha,
-                OrdenTotal = Orden.Total,
-            };
-            return OrdenResponse;
+            OrdenWithProductsResponse OrdenWithProductsResponse = await GenerateOrdenWithProducts(Carrito, Orden);
+            return OrdenWithProductsResponse;
         }
 
         public async Task<decimal> GetTotalCarrito(int clientId)
@@ -175,6 +137,46 @@ namespace Application.UseCase
         {
             var Orden = await _query.GetOrden(id);
             return Orden;
+        }
+
+        public async Task<OrdenWithProductsResponse> GenerateOrdenWithProducts(Carrito carrito, Orden orden)
+        {
+            Cliente Cliente = await _servicesCliente.GetClienteById(carrito.ClienteId);
+            ClienteResponse ClienteResponse = new ClienteResponse
+            {
+                ClienteId = Cliente.ClienteId,
+                dni = Cliente.DNI,
+                name = Cliente.Nombre,
+                lastname = Cliente.Apellido,
+                address = Cliente.Direccion,
+                phoneNumber = Cliente.Telefono
+            };
+            List<ProductoResponse> Productos = new List<ProductoResponse>();
+
+            foreach (CarritoProducto carritoProd in carrito.CarritoProductos)
+            {
+                Producto Prod = await _queryProducto.GetProducto(carritoProd.ProductoId);
+                ProductoResponse ProdResponse = new ProductoResponse
+                {
+                    ProductoId = Prod.ProductoId,
+                    ProductoNombre = Prod.Nombre,
+                    ProductoDescripcion = Prod.Descripcion,
+                    ProductoMarca = Prod.Marca,
+                    ProductoCodigo = Prod.Codigo,
+                    ProductoPrecio = Prod.Precio,
+                    ProductoImage = Prod.Image
+                };
+                Productos.Add(ProdResponse);
+            }
+            OrdenWithProductsResponse OrdenWithProductResponse = new OrdenWithProductsResponse
+            {
+                OrdenId = orden.OrdenId,
+                ClienteResponse = ClienteResponse,
+                ProductosResponse = Productos,
+                OrdenFecha = orden.Fecha,
+                OrdenTotal = orden.Total
+            };
+            return OrdenWithProductResponse;
         }
     }
 }

@@ -6,11 +6,11 @@ namespace ProyectoTp2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductosController : ControllerBase
+    public class productosController : ControllerBase
     {
         private readonly IProductoServices _services;
 
-        public ProductosController(IProductoServices services)
+        public productosController(IProductoServices services)
         {
             _services = services;
         }

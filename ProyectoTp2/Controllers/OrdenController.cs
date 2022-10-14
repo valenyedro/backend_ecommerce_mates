@@ -7,11 +7,11 @@ namespace ProyectoTp2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdenController : ControllerBase
+    public class ordenController : ControllerBase
     {
         private readonly IOrdenServices _services;
 
-        public OrdenController(IOrdenServices services)
+        public ordenController(IOrdenServices services)
         {
             _services = services;
         }
