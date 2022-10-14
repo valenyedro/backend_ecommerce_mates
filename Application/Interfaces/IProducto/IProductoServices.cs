@@ -10,6 +10,6 @@ namespace Application.Interfaces.IProducto
         Task<Producto> DeleteProducto(Producto cliente);
         Task<List<ProductoResponse>> GetAllProductos();
         Task<ProductoResponse> GetProductoById(int id);
-        Task<List<ProductoResponse>> GetProductosSort(ProductoRequest request);
+        Task<List<ProductoResponse>> GetProductosSort(string? name, bool? sort);
     }
 }

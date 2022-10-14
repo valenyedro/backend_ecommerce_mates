@@ -21,6 +21,7 @@ namespace Application.UseCase
 
         public async Task<ClienteResponse> CreateCliente(ClienteRequest request)
         {
+            var Clientes = await GetAllClientes();
             var Cliente = new Cliente
             {
                 DNI = request.dni,
@@ -29,6 +30,11 @@ namespace Application.UseCase
                 Direccion = request.address,
                 Telefono = request.phoneNumber
             };
+            foreach (Cliente cliente in Clientes)
+            {
+                if (cliente.DNI == Cliente.DNI)
+                    return null;
+            }
             
             await _command.InsertCliente(Cliente);
             Cliente.Carritos.Add(await _servicesCarrito.CreateCarrito(Cliente.ClienteId));

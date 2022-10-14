@@ -16,29 +16,40 @@ namespace Application.UseCase
             _query = query;
         }
 
-        public async Task<List<ProductoResponse>> GetProductosSort(ProductoRequest request)
+        public async Task<List<ProductoResponse>> GetProductosSort(string? name, bool? sort)
         {
             List<Producto> ListaProductos = await _query.GetListProductos();
             List<Producto> ListaProductosSeleccionados = new List<Producto>();
-
-            if (request.sort)
+            if (sort == null)
+                sort = true;
+            if(name == null)
             {
                 var ProductosOrdenados = from Producto in ListaProductos
-                                         where Producto.Nombre.ToLower().Contains(request.name.ToLower())
                                          orderby Producto.Precio ascending
                                          select Producto;
                 foreach (Producto prod in ProductosOrdenados)
                     ListaProductosSeleccionados.Add(prod);
             }
-            else
+            if ((bool)sort && name != null)
             {
                 var ProductosOrdenados = from Producto in ListaProductos
-                                         where Producto.Nombre.ToLower().Contains(request.name.ToLower())
+                                         where Producto.Nombre.ToLower().Contains(name.ToLower())
+                                         orderby Producto.Precio ascending
+                                         select Producto;
+                foreach (Producto prod in ProductosOrdenados)
+                    ListaProductosSeleccionados.Add(prod);
+            }
+            else if (!(bool)sort && name != null)
+            {
+                var ProductosOrdenados = from Producto in ListaProductos
+                                         where Producto.Nombre.ToLower().Contains(name.ToLower())
                                          orderby Producto.Precio descending
                                          select Producto;
                 foreach (Producto prod in ProductosOrdenados)
                     ListaProductosSeleccionados.Add(prod);
             }
+            if (ListaProductosSeleccionados.Count() == 0)
+                return null;
 
             List<ProductoResponse> ListaProdResponse = new List<ProductoResponse>();
             foreach (Producto prod in ListaProductosSeleccionados)
@@ -57,6 +68,7 @@ namespace Application.UseCase
             }
             return ListaProdResponse;
         }
+
 
         public async Task<List<ProductoResponse>> GetAllProductos()
         {
@@ -98,6 +110,21 @@ namespace Application.UseCase
                 ProductoImage = Producto.Image,
             };
             return ProResponse;
+        }
+
+        public async Task<Producto> CreateProducto(ProductoRequest request)
+        {
+            var Producto = new Producto
+            {
+                Nombre = request.ProductoNombre,
+                Descripcion = request.ProductoDescripcion,
+                Marca = request.ProductoMarca,
+                Codigo = request.ProductoCodigo,
+                Precio = request.ProductoPrecio,
+                Image = request.ProductoImage,
+            };
+            await _command.InsertProducto(Producto);
+            return Producto;
         }
 
         public async Task<Producto> UpdateProducto(Producto producto)

@@ -25,7 +25,7 @@ namespace ProyectoTp2.Controllers
                     return BadRequest();
                 return new JsonResult(result) { StatusCode = 201 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }

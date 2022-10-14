@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces.IOrden;
 using Application.Models;
-using Application.Request;
 using Application.Response;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,20 +26,20 @@ namespace ProyectoTp2.Controllers
                     return BadRequest();
                 return new JsonResult(OrdenResponse) { StatusCode = 201 };
 
-            } catch(Exception e)
+            } catch(Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateBalance(BalanceRequest request)
+        [HttpGet]
+        public async Task<IActionResult> CreateBalance([FromQuery] DateTime? from, [FromQuery] DateTime? to)
         {
             try
             {
-                BalanceResponse BalanceResponse = await _services.CreateBalance(request);
+                BalanceResponse BalanceResponse = await _services.CreateBalance(from, to);
                 if (BalanceResponse == null)
-                    return BadRequest();
+                    return NotFound();
                 return new JsonResult(BalanceResponse) { StatusCode = 200 };
             }
             catch (Exception)

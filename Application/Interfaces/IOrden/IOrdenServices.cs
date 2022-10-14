@@ -1,5 +1,4 @@
 ﻿using Application.Models;
-using Application.Request;
 using Application.Response;
 using Domain.Entities;
 
@@ -13,6 +12,6 @@ namespace Application.Interfaces.IOrden
         Task<List<Orden>> GetAllOrdenes();
         Task<Orden> GetOrdenById(Guid id);
         Task<decimal> GetTotalCarrito(int clientId);
-        Task<BalanceResponse> CreateBalance(BalanceRequest request);
+        Task<BalanceResponse> CreateBalance(DateTime? from, DateTime? to);
     }
 }

@@ -25,7 +25,7 @@ namespace ProyectoTp2.Controllers
                     return BadRequest();
                 return new JsonResult(CarritoResponse) { StatusCode = 200 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }
@@ -41,7 +41,7 @@ namespace ProyectoTp2.Controllers
                     return BadRequest();
                 return new JsonResult(carritoResponse) { StatusCode = 200 };
 
-            } catch (Exception e)
+            } catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }
@@ -57,7 +57,7 @@ namespace ProyectoTp2.Controllers
                     return BadRequest();
                 return new JsonResult(Result) { StatusCode = 200 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }

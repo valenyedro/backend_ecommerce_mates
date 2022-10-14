@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces.IProducto;
-using Application.Models;
 using Application.Response;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,36 +16,21 @@ namespace ProyectoTp2.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProductos()
+        public async Task<IActionResult> GetProductosSort([FromQuery] string? name, [FromQuery] bool? sort)
         {
             try
             {
-                var Result = await _services.GetAllProductos();
+                List<ProductoResponse> Result = await _services.GetProductosSort(name, sort);
                 if (Result == null)
                     return NotFound();
                 return new JsonResult(Result);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetProductosSort(ProductoRequest request)
-        {
-            try
-            {
-                List<ProductoResponse> Result = await _services.GetProductosSort(request);
-                if (Result == null)
-                    return NotFound();
-                return new JsonResult(Result);
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(null) { StatusCode = 500 };
-            }
-        }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductoById(int id)
@@ -58,7 +42,7 @@ namespace ProyectoTp2.Controllers
                     return NotFound();
                 return new JsonResult(Result) { StatusCode = 200 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(null) { StatusCode = 500 };
             }

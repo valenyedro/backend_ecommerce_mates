@@ -4,7 +4,6 @@ using Application.Interfaces.ICliente;
 using Application.Interfaces.IOrden;
 using Application.Interfaces.IProducto;
 using Application.Models;
-using Application.Request;
 using Application.Response;
 using Domain.Entities;
 
@@ -29,7 +28,7 @@ namespace Application.UseCase
             _queryProducto = queryProducto;
         }
 
-        public async Task<BalanceResponse> CreateBalance(BalanceRequest request)
+        public async Task<BalanceResponse> CreateBalance(DateTime? from, DateTime? to)
         {
             List<CarritoProducto> CarritosProd = await _queryCarritoProducto.GetListCarritoProductos();
             List<Orden> Ordenes = await GetAllOrdenes();
@@ -37,8 +36,24 @@ namespace Application.UseCase
                 return null;
 
             var OrdenesPorFecha = from Orden in Ordenes
-                                  where Orden.Fecha >= request.@from.Date && Orden.Fecha <= request.@to.Date.AddDays(1)
+                                  where Orden.Fecha >= ((DateTime)@from).Date && Orden.Fecha <= ((DateTime)@to).Date.AddDays(1)
                                   select Orden;
+            if (from == null && to == null)
+            {
+                OrdenesPorFecha = Ordenes;
+            }
+            else if (from == null && to != null)
+            {
+                OrdenesPorFecha = from Orden in Ordenes
+                                  where Orden.Fecha <= ((DateTime)@to).Date.AddDays(1)
+                                  select Orden;
+            }
+            else if (from != null && to == null)
+            {
+                OrdenesPorFecha = from Orden in Ordenes
+                                  where Orden.Fecha >= ((DateTime)@from).Date
+                                  select Orden;
+            }
 
             if (OrdenesPorFecha.Count() == 0)
                 return null;
