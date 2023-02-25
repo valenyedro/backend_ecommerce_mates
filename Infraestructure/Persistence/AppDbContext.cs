@@ -82,7 +82,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 1,
                     Nombre = "Mate camionero ALUMINIO",
-                    Descripcion = "Un mate estilo camionero con virola de aluminio y recubierto de cuero.",
+                    Descripcion = "Un mate estilo camionero con virola de aluminio y recubierto de cuero.\r\n• Mate elaborado con calabaza brasilera seleccionada.\r\n• Virola de aluminio lisa.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#1",
                     Precio = 2000,
@@ -91,7 +91,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 2,
                     Nombre = "Mate torpedo ALUMINIO",
-                    Descripcion = "Un mate estilo torpedo con virola de aluminio y recubierto de cuero.",
+                    Descripcion = "Un mate estilo torpedo con virola de aluminio y recubierto de cuero.\r\n• Mate elaborado con calabaza brasilera seleccionada.\r\n• Virola de aluminio lisa.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#2",
                     Precio = 2000,
@@ -100,7 +100,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 3,
                     Nombre = "Mate camionero ALUMINIO CINCELADO",
-                    Descripcion = "Un mate estilo camionero con virola de aluminio cincelada y recubierto de cuero.",
+                    Descripcion = "Un mate estilo camionero con virola de aluminio cincelada y recubierto de cuero.\r\n• Mate elaborado con calabaza brasilera seleccionada.\r\n• Virola de aluminio cincelada.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.\r\n• Los mejores detalles para un mate mucho más estético.",
                     Marca = "Mates Berazategui",
                     Codigo = "#3",
                     Precio = 2300,
@@ -109,7 +109,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 4,
                     Nombre = "Mate torpedo ALUMINIO CINCELADO",
-                    Descripcion = "Un mate estilo torpedo con virola de aluminio cincelada y recubierto de cuero.",
+                    Descripcion = "Un mate estilo torpedo con virola de aluminio cincelada y recubierto de cuero.\r\n• Mate elaborado con calabaza brasilera seleccionada.\r\n• Virola de aluminio cincelada.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.\r\n• Los mejores detalles para un mate mucho más estético.",
                     Marca = "Mates Berazategui",
                     Codigo = "#4",
                     Precio = 2300,
@@ -118,7 +118,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 5,
                     Nombre = "Mate camionero ALPACA LISA",
-                    Descripcion = "Un mate estilo camionero con virola de alpaca lisa y recubierto de cuero.",
+                    Descripcion = "Un mate estilo camionero con virola de alpaca lisa y recubierto de cuero.\r\n• La máxima calidad en la virola tu mate.\r\n• Elaborado con calabaza brasilera seleccionada para una calidad óptima.\r\n• Virola de alpaca lisa.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#5",
                     Precio = 3000,
@@ -127,7 +127,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 6,
                     Nombre = "Mate torpedo ALPACA LISA",
-                    Descripcion = "Un mate estilo torpedo con virola de alpaca lisa y recubierto de cuero.",
+                    Descripcion = "Un mate estilo torpedo con virola de alpaca lisa y recubierto de cuero.\r\n• La máxima calidad en la virola tu mate.\r\n• Elaborado con calabaza brasilera seleccionada para una calidad óptima.\r\n• Virola de alpaca lisa.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#6",
                     Precio = 3000,
@@ -136,7 +136,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 7,
                     Nombre = "Mate camionero ALPACA CINCELADA",
-                    Descripcion = "Un mate estilo camionero con virola de alpaca cincelada y recubierto de cuero.",
+                    Descripcion = "Un mate estilo camionero con virola de alpaca cincelada y recubierto de cuero.\r\n• La máxima calidad y detalle en la virola tu mate.\r\n• Elaborado con calabaza brasilera seleccionada para una calidad óptima.\r\n• Virola de alpaca cincelada.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#7",
                     Precio = 3300,
@@ -145,7 +145,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 8,
                     Nombre = "Mate torpedo ALPACA CINCELADA",
-                    Descripcion = "Un mate estilo torpedo con virola de alpaca cincelada y recubierto de cuero.",
+                    Descripcion = "Un mate estilo torpedo con virola de alpaca cincelada y recubierto de cuero.\r\n• La máxima calidad y detalle en la virola tu mate.\r\n• Elaborado con calabaza brasilera seleccionada para una calidad óptima.\r\n• Virola de alpaca cincelada.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.",
                     Marca = "Mates Berazategui",
                     Codigo = "#8",
                     Precio = 3300,
@@ -154,7 +154,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 9,
                     Nombre = "Mate camionero ALPACA GRABADA",
-                    Descripcion = "Un mate estilo camionero con virola de alpaca grabada totalmente personalizada y recubierto de cuero.",
+                    Descripcion = "Un mate estilo camionero con virola de alpaca grabada totalmente personalizada y recubierto de cuero.\r\n• Elaborado con calabaza brasilera seleccionada para una calidad óptima.\r\n• Virola de alpaca.\r\n• Grabado láser.\r\n• Forrado en cuero.\r\n• Con refuerzo en las patas para máxima estabilidad.\r\n• ¡Pedinos tu diseño y te lo hacemos!",
                     Marca = "Mates Berazategui",
                     Codigo = "#9",
                     Precio = 4200,
@@ -163,7 +163,7 @@ namespace Infraestructure.Persistence
                 {
                     ProductoId = 10,
                     Nombre = "Bombilla pico loro ACERO INOXIDABLE",
-                    Descripcion = "Una bombilla ideal para un mate ideal. Con estilo pico loro para máximo confort.",
+                    Descripcion = "Una bombilla ideal para un mate ideal. Con estilo pico loro para máximo confort.\r\n• Acero inoxidable.\r\n• Medida aproximada: 19cm.\r\n• Bombilla estilo pico loro para mayor confort.",
                     Marca = "Mates Berazategui",
                     Codigo = "#10",
                     Precio = 800,

@@ -42,6 +42,11 @@ builder.Services.AddScoped<IOrdenCommand, OrdenCommand>();
 builder.Services.AddScoped<IOrdenQuery, OrdenQuery>();
 builder.Services.AddScoped<IOrdenServices, OrdenServices>();
 
+builder.Services.AddCors(policy =>
+{
+    policy.AddDefaultPolicy(options => options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+});
+
 
 var app = builder.Build();
 
@@ -51,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
